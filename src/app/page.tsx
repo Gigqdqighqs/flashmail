@@ -1040,8 +1040,15 @@ export default function Home() {
           <span style={{ fontWeight: 700, color: "var(--primary)" }}>FlashMail</span> - Email
           sementara yang cepat & aman
         </p>
-        <p style={{ marginTop: 4 }}>© {new Date().getFullYear()} R-Universe Labs</p>
       </footer>
     </>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div style={{ padding: 40, textAlign: "center" }}>Memuat...</div>}>
+      <HomeContent />
+    </Suspense>
   );
 }
