@@ -3,13 +3,13 @@ import "./globals.css";
 import LoadingScreen from "@/components/LoadingScreen";
 
 export const metadata: Metadata = {
-  title: "FlashMail — Email Sementara yang Estetis",
+  title: "FlashMail - Email Sementara Gratis",
   description:
-    "Dapatkan email sementara dalam hitungan detik. Privat, anonim, dan cantik. Lindungi privasi kamu dari spam.",
+    "Dapatkan email sementara dalam hitungan detik. Privat, dan anonim. Lindungi privasi kamu dari spam",
   keywords: ["temp mail", "email sementara", "disposable email", "privacy", "anonymous email", "flashmail"],
   openGraph: {
-    title: "FlashMail — Email Sementara yang Estetis",
-    description: "Dapatkan email sementara dalam hitungan detik. Privat, anonim, dan cantik.",
+    title: "FlashMail — Email Sementara Gratis",
+    description: "Dapatkan email sementara dalam hitungan detik. Privat, dan anonim",
     type: "website",
   },
 };
