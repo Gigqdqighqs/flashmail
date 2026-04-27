@@ -1,9 +1,9 @@
 import { db, schema } from "@/db";
 import { eq, and, desc } from "drizzle-orm";
 import { nanoid } from "nanoid";
-import { getUserPlan } from "./auth";
+import { getUserPlan, getFullUser } from "./auth";
 
-const MAIL_DOMAIN = process.env.MAIL_DOMAIN || "firemail.zone.id";
+const MAIL_DOMAIN = process.env.MAIL_DOMAIN || "flashmail.qzz.io";
 const FREE_MAX_MAILBOXES = 3;
 const FREE_EXPIRY_HOURS = 2;
 const VIP_EXPIRY_HOURS = 168; // 7 days
@@ -23,7 +23,6 @@ export async function createMailbox(
     customAlias?: string,
     customExpiryHours?: number
 ): Promise<{ success: boolean; mailbox?: typeof schema.mailboxes.$inferSelect; error?: string }> {
-    const { getFullUser } = await import("./auth");
     const user = await getFullUser(userId);
     if (!user) return { success: false, error: "User tidak ditemukan" };
 
