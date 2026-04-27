@@ -131,7 +131,7 @@ function HomeContent() {
   // Generate new mailbox
   const generateMailbox = async () => {
     if (!user) {
-      showToast("Anda harus login/daftar (gratis) untuk membuat email.");
+      showToast("Kamu harus login/daftar (gratis) untuk membuat email.");
       setAuthMode("register");
       setShowAuth(true);
       return;
@@ -923,7 +923,7 @@ function HomeContent() {
               </h2>
               <p style={{ color: "var(--on-surface-variant)", fontSize: 14, marginTop: 4 }}>
                 {authMode === "login"
-                  ? "Simpan mailbox Anda di semua perangkat"
+                  ? "Simpan mailbox kamu di semua perangkat"
                   : "Buat akun untuk akses lebih lanjut"}
               </p>
             </div>

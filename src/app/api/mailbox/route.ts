@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
 
         const session = await getSession();
         if (!session) {
-            return NextResponse.json({ error: "Anda harus login untuk membuat email sementara." }, { status: 401 });
+            return NextResponse.json({ error: "Kamu harus login untuk membuat email sementara." }, { status: 401 });
         }
 
         const result = await createMailbox(session.userId, customAlias, customExpiryHours);
