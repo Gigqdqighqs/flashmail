@@ -63,7 +63,8 @@ export async function createMailbox(
         return { success: false, error: "Alamat email ini sudah digunakan oleh orang lain" };
     }
 
-    const expiryHours = isPremium && customExpiryHours ? customExpiryHours : FREE_EXPIRY_HOURS;
+    const DEFAULT_PREMIUM_EXPIRY = 24;
+    const expiryHours = isPremium ? (customExpiryHours || DEFAULT_PREMIUM_EXPIRY) : FREE_EXPIRY_HOURS;
 
     const mailbox = {
         id: nanoid(16),

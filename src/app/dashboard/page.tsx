@@ -19,7 +19,7 @@ export default function DashboardPage() {
     // Modal Custom Alias
     const [showCustom, setShowCustom] = useState(false);
     const [customAlias, setCustomAlias] = useState("");
-    const [customExpiry, setCustomExpiry] = useState("2");
+    const [customExpiry, setCustomExpiry] = useState("24");
     const [customLoading, setCustomLoading] = useState(false);
 
     useEffect(() => {
@@ -237,14 +237,14 @@ export default function DashboardPage() {
                         gap: 16
                     }}>
                         <div>
-                            <h3 style={{ fontSize: 20, margin: "0 0 8px 0", fontWeight: 800, wordBreak: "break-all" }}>{mb.address}</h3>
+                            <h3 style={{ fontSize: 16, margin: "0 0 8px 0", fontWeight: 800, wordBreak: "break-all" }}>{mb.address}</h3>
                             <p style={{ fontSize: 14, color: "var(--on-surface-variant)", margin: 0, display: "flex", alignItems: "center", gap: 6 }}>
                                 <span className="material-symbols-outlined" style={{ fontSize: 16 }}>schedule</span>
                                 Berakhir: <strong>{new Date(mb.expiresAt).toLocaleString("id-ID")}</strong>
                             </p>
                         </div>
                         <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-                            <Link href={`/inbox/${mb.id}`} className="btn-primary" style={{ padding: "10px 24px", borderRadius: 9999, textDecoration: "none" }}>
+                            <Link href={`/?mailbox=${mb.id}`} className="btn-primary" style={{ padding: "10px 24px", borderRadius: 9999, textDecoration: "none" }}>
                                 Buka Kotak Masuk
                             </Link>
                             <button onClick={() => handleDeleteMailbox(mb.id)} className="btn-outline" style={{ padding: "10px 20px", borderRadius: 9999, color: "var(--error)", borderColor: "var(--error)" }}>

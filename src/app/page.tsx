@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useSearchParams } from "next/navigation";
 
 interface Mailbox {
   id: string;
@@ -29,6 +30,9 @@ interface User {
 }
 
 export default function Home() {
+  const searchParams = useSearchParams();
+  const mailboxIdFromUrl = searchParams.get("mailbox");
+
   const [mailboxes, setMailboxes] = useState<Mailbox[]>([]);
   const [selectedMailbox, setSelectedMailbox] = useState<Mailbox | null>(null);
   const [emails, setEmails] = useState<Email[]>([]);
@@ -64,12 +68,16 @@ export default function Home() {
     try {
       const res = await fetch("/api/mailbox");
       const data = await res.json();
-      setMailboxes(data.mailboxes || []);
-      if (data.mailboxes?.length > 0 && !selectedMailbox) {
-        setSelectedMailbox(data.mailboxes[0]);
+      const fetchedMailboxes = data.mailboxes || [];
+      setMailboxes(fetchedMailboxes);
+
+      if (fetchedMailboxes.length > 0 && !selectedMailbox) {
+        // Priority: Mailbox from URL > First mailbox
+        const urlMailbox = fetchedMailboxes.find((m: Mailbox) => m.id === mailboxIdFromUrl);
+        setSelectedMailbox(urlMailbox || fetchedMailboxes[0]);
       }
     } catch { }
-  }, [selectedMailbox]);
+  }, [selectedMailbox, mailboxIdFromUrl]);
 
   // Fetch emails for selected mailbox
   const fetchEmails = useCallback(async () => {
