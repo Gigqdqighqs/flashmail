@@ -26,9 +26,15 @@ export async function GET(request: NextRequest): Promise<Response> {
         const tokens: OAuth2Tokens = await google.validateAuthorizationCode(code, storedCodeVerifier);
         const response = await fetch("https://openidconnect.googleapis.com/v1/userinfo", {
             headers: {
-                Authorization: `Bearer ${tokens.accessToken}`
+                Authorization: `Bearer ${tokens.accessToken()}`
             }
         });
+
+        if (!response.ok) {
+            const errBody = await response.text();
+            throw new Error(`Failed to fetch user info: ${response.status} ${errBody}`);
+        }
+
         const googleUser: { sub: string, email: string } = await response.json();
 
         // Check if user already exists
