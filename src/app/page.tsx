@@ -479,7 +479,7 @@ function HomeContent() {
                   <h3 style={{ fontSize: 20, fontWeight: 800 }}>Pro</h3>
                   <p style={{ fontSize: 32, fontWeight: 800, margin: "12px 0", color: "var(--primary)" }}>Rp50rb<span style={{ fontSize: 12, color: "var(--on-surface-variant)" }}>/bln</span></p>
                   <ul style={{ listStyle: "none", padding: 0, margin: "16px 0", gap: 12, display: "flex", flexDirection: "column", fontSize: 13, fontWeight: 600 }}>
-                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--primary)", fontSize: 18 }}>check_circle</span> <strong>500</strong>email/hari</li>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--primary)", fontSize: 18 }}>check_circle</span> 500 email/hari</li>
                     <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--primary)", fontSize: 18 }}>check_circle</span> Alamat custom</li>
                   </ul>
                   <button className="btn-primary" style={{ width: "100%", fontSize: 14, padding: "12px", borderRadius: 9999 }} onClick={() => { setAuthMode("register"); setShowAuth(true); }}>
