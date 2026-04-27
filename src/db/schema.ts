@@ -9,6 +9,8 @@ export const users = sqliteTable("users", {
         .notNull()
         .default("free"),
     generationCountToday: integer("generation_count_today").notNull().default(0),
+    ipAddress: text("ip_address"),
+    userAgent: text("user_agent"),
     vipUntil: integer("vip_until", { mode: "timestamp" }),
     createdAt: integer("created_at", { mode: "timestamp" })
         .notNull()
@@ -41,6 +43,8 @@ export const sessions = sqliteTable("sessions", {
         .notNull()
         .references(() => users.id, { onDelete: "cascade" }),
     expiresAt: integer("expires_at", { mode: "timestamp" }).notNull(),
+    ipAddress: text("ip_address"),
+    userAgent: text("user_agent"),
     createdAt: integer("created_at", { mode: "timestamp" })
         .notNull()
         .$defaultFn(() => new Date()),

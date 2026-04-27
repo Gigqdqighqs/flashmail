@@ -10,7 +10,7 @@ const JWT_SECRET = new TextEncoder().encode(
 );
 const SESSION_DURATION = 30 * 24 * 60 * 60 * 1000; // 30 days
 
-export async function createSession(userId: string): Promise<string> {
+export async function createSession(userId: string, ipAddress?: string | null, userAgent?: string | null): Promise<string> {
     const sessionId = nanoid(32);
     const expiresAt = new Date(Date.now() + SESSION_DURATION);
 
@@ -18,6 +18,8 @@ export async function createSession(userId: string): Promise<string> {
         id: sessionId,
         userId,
         expiresAt,
+        ipAddress: ipAddress ?? null,
+        userAgent: userAgent ?? null,
     });
 
     const token = await new SignJWT({ sessionId, userId })
@@ -67,24 +69,13 @@ export async function getSession(): Promise<{
     }
 }
 
-export async function getOrCreateGuestUser(): Promise<string> {
-    const session = await getSession();
-    if (session) return session.userId;
-
-    // Create guest user
-    const userId = nanoid(16);
-    await db.insert(schema.users).values({
-        id: userId,
-        plan: "free",
-    });
-
-    await createSession(userId);
-    return userId;
-}
+// Removed getOrCreateGuestUser to enforce login per specification
 
 export async function registerUser(
     email: string,
-    password: string
+    password: string,
+    ipAddress?: string | null,
+    userAgent?: string | null
 ): Promise<{ success: boolean; error?: string; userId?: string }> {
     const existing = await db
         .select()
@@ -104,15 +95,19 @@ export async function registerUser(
         email,
         passwordHash,
         plan: "free",
+        ipAddress: ipAddress ?? null,
+        userAgent: userAgent ?? null,
     });
 
-    await createSession(userId);
+    await createSession(userId, ipAddress, userAgent);
     return { success: true, userId };
 }
 
 export async function loginUser(
     email: string,
-    password: string
+    password: string,
+    ipAddress?: string | null,
+    userAgent?: string | null
 ): Promise<{ success: boolean; error?: string; userId?: string }> {
     const user = await db
         .select()
@@ -129,7 +124,7 @@ export async function loginUser(
         return { success: false, error: "Email atau kata sandi salah" };
     }
 
-    await createSession(user.id);
+    await createSession(user.id, ipAddress, userAgent);
     return { success: true, userId: user.id };
 }
 

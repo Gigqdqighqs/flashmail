@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getOrCreateGuestUser, getSession } from "@/lib/auth";
+import { getSession } from "@/lib/auth";
 import { createMailbox, getUserMailboxes, deleteMailbox } from "@/lib/mail";
 
 export async function GET() {
@@ -26,8 +26,12 @@ export async function POST(req: NextRequest) {
             // body might be empty
         }
 
-        const userId = await getOrCreateGuestUser();
-        const result = await createMailbox(userId, customAlias, customExpiryHours);
+        const session = await getSession();
+        if (!session) {
+            return NextResponse.json({ error: "Anda harus login untuk membuat email sementara." }, { status: 401 });
+        }
+
+        const result = await createMailbox(session.userId, customAlias, customExpiryHours);
 
         if (!result.success) {
             return NextResponse.json({ error: result.error }, { status: 400 });

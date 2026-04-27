@@ -43,7 +43,9 @@ export async function POST(req: NextRequest) {
                     { status: 400 }
                 );
             }
-            const result = await registerUser(email, password);
+            const ipAddress = req.headers.get("x-forwarded-for") || req.ip || null;
+            const userAgent = req.headers.get("user-agent") || null;
+            const result = await registerUser(email, password, ipAddress, userAgent);
             if (!result.success) {
                 return NextResponse.json({ error: result.error }, { status: 400 });
             }
@@ -57,7 +59,9 @@ export async function POST(req: NextRequest) {
                     { status: 400 }
                 );
             }
-            const result = await loginUser(email, password);
+            const ipAddress = req.headers.get("x-forwarded-for") || req.ip || null;
+            const userAgent = req.headers.get("user-agent") || null;
+            const result = await loginUser(email, password, ipAddress, userAgent);
             if (!result.success) {
                 return NextResponse.json({ error: result.error }, { status: 400 });
             }

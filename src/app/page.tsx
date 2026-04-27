@@ -122,6 +122,12 @@ export default function Home() {
 
   // Generate new mailbox
   const generateMailbox = async () => {
+    if (!user) {
+      showToast("Anda harus login/daftar (gratis) untuk membuat email.");
+      setAuthMode("register");
+      setShowAuth(true);
+      return;
+    }
     setCreating(true);
     try {
       const res = await fetch("/api/mailbox", { method: "POST" });
@@ -131,7 +137,7 @@ export default function Home() {
       } else {
         await fetchMailboxes();
         setSelectedMailbox(data.mailbox);
-        showToast("Email baru berhasil dibuat! 🎉");
+        showToast("Email baru berhasil dibuat");
       }
     } catch {
       showToast("Gagal membuat email baru");
@@ -201,7 +207,7 @@ export default function Home() {
         setShowAuth(false);
         await fetchSession();
         await fetchMailboxes();
-        showToast(authMode === "login" ? "Berhasil masuk! 🔥" : "Akun berhasil dibuat! 🎉");
+        showToast(authMode === "login" ? "Berhasil masuk" : "Akun berhasil dibuat");
       }
     } catch {
       setAuthError("Terjadi kesalahan");
@@ -309,7 +315,12 @@ export default function Home() {
       <main style={{ maxWidth: 900, margin: "0 auto", padding: "0 24px" }}>
         {/* ─── Hero Section (shown when no mailbox) ─── */}
         {mailboxes.length === 0 && !loading && (
-          <section style={{ textAlign: "center", padding: "80px 0 40px" }}>
+          <section style={{ textAlign: "center", padding: "80px 0 40px", position: "relative" }}>
+            {/* Floating Background Effects */}
+            <div className="hide-mobile animate-float-1" style={{ position: "absolute", top: "10%", left: "5%", zIndex: -1, opacity: 0.6, fontSize: 48 }}>✉️</div>
+            <div className="hide-mobile animate-float-2" style={{ position: "absolute", top: "20%", right: "10%", zIndex: -1, opacity: 0.5, fontSize: 64 }}>🛡️</div>
+            <div className="hide-mobile animate-float-3" style={{ position: "absolute", bottom: "10%", left: "15%", zIndex: -1, opacity: 0.4, fontSize: 56 }}>💨</div>
+            <div className="hide-mobile animate-float-4" style={{ position: "absolute", bottom: "20%", right: "5%", zIndex: -1, opacity: 0.5, fontSize: 40 }}>🔒</div>
             <h1
               style={{
                 fontSize: "clamp(32px, 6vw, 48px)",
@@ -319,10 +330,10 @@ export default function Home() {
                 marginBottom: 20,
               }}
             >
-              Email Sementara Anda,
+              Buat Email Sementara,
               <br />
               <span style={{ color: "var(--primary-container)", position: "relative" }}>
-                Lebih Cantik & Privat.
+                Lebih Cepat & Aman
                 <svg
                   style={{
                     position: "absolute",
@@ -354,8 +365,8 @@ export default function Home() {
                 lineHeight: 1.6,
               }}
             >
-              Dapatkan kotak masuk sementara dalam hitungan detik. Hindari spam, lindungi
-              privasi, dan nikmati tampilan estetis.
+              Dapatkan email sementara dalam hitungan detik. Hindari spam, dan lindungi
+              privasi kamu
             </p>
             <button
               className="btn-primary"
@@ -383,21 +394,21 @@ export default function Home() {
                 {
                   icon: "bolt",
                   title: "Cepat & Instan",
-                  desc: "Tidak perlu mendaftar. Buka halaman, email siap digunakan.",
+                  desc: "Tidak perlu mendaftar. Buka halaman, email siap digunakan",
                   bg: "var(--note-yellow)",
                   rotate: "-2deg",
                 },
                 {
                   icon: "masks",
                   title: "Sepenuhnya Anonim",
-                  desc: "Kami tidak melacak IP atau menyimpan data pribadi Anda.",
+                  desc: "Kami tidak melacak IP atau menyimpan data pribadi Kamu",
                   bg: "var(--note-blue)",
                   rotate: "1deg",
                 },
                 {
                   icon: "delete_sweep",
                   title: "Hapus Otomatis",
-                  desc: "Semua email dihancurkan secara permanen setelah beberapa jam.",
+                  desc: "Semua email dihapus secara permanen setelah beberapa jam",
                   bg: "var(--note-rose)",
                   rotate: "-1deg",
                 },
@@ -424,6 +435,40 @@ export default function Home() {
                   </p>
                 </div>
               ))}
+            </div>
+
+            {/* Premium Section Advertisement */}
+            <div style={{ marginTop: 80, marginBottom: 80, padding: 40, borderRadius: 24, background: "var(--surface)", border: "2px dashed var(--outline)", position: "relative" }} className="paper-shadow-lg glass-panel">
+              <div className="tape" style={{ top: -12, left: "50%", transform: "translateX(-50%) rotate(-2deg)", width: 140 }}></div>
+              <div style={{ textAlign: "center", marginBottom: 32 }}>
+                <span className="chip chip-info" style={{ marginBottom: 16 }}>🌟 KENAPA HARUS PREMIUM?</span>
+                <h2 style={{ fontSize: 32, fontWeight: 800, marginBottom: 12 }}>Batasan Terlalu Ketat?</h2>
+                <p style={{ fontSize: 16, color: "var(--on-surface-variant)" }}>Dapatkan lebih banyak kuota setiap hari, kustomisasi email keren, dan masa aktif lebih leluasa.</p>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
+                <div className="paper-border" style={{ background: "var(--surface-lowest)", padding: 24, borderRadius: 16, transform: "rotate(-1deg)" }}>
+                  <h3 style={{ fontSize: 20, fontWeight: 800 }}>Paket Gratis</h3>
+                  <p style={{ fontSize: 32, fontWeight: 800, margin: "16px 0", color: "var(--on-surface-variant)" }}>Rp0</p>
+                  <ul style={{ listStyle: "none", padding: 0, gap: 12, display: "flex", flexDirection: "column", fontSize: 15, color: "var(--on-surface-variant)" }}>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--error)", fontSize: 20 }}>close</span> Hanya 3 email/hari</li>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--error)", fontSize: 20 }}>close</span> Kedaluwarsa dlm 2 jam</li>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--error)", fontSize: 20 }}>close</span> Alamat diacak sistem</li>
+                  </ul>
+                </div>
+                <div className="paper-border" style={{ background: "var(--note-blue)", padding: 28, borderRadius: 16, transform: "scale(1.05) rotate(1deg)", position: "relative", zIndex: 10 }}>
+                  <div style={{ position: "absolute", top: -12, right: -12, background: "var(--primary)", color: "white", padding: "4px 12px", borderRadius: 9999, fontWeight: 800, fontSize: 12, border: "2px solid var(--ink)" }}>PALING LARIS 🔥</div>
+                  <h3 style={{ fontSize: 24, fontWeight: 800 }}>Paket Unlimited</h3>
+                  <p style={{ fontSize: 32, fontWeight: 800, margin: "12px 0", color: "var(--primary)" }}>Rp100rb<span style={{ fontSize: 14, color: "var(--on-surface-variant)" }}>/selamanya</span></p>
+                  <ul style={{ listStyle: "none", padding: 0, margin: "16px 0", gap: 12, display: "flex", flexDirection: "column", fontSize: 15, fontWeight: 600 }}>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--primary)", fontSize: 20 }}>check_circle</span> <strong>Tanpa batas</strong> jumlah email!</li>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--primary)", fontSize: 20 }}>check_circle</span> Auto-delete dpt diatur</li>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--primary)", fontSize: 20 }}>check_circle</span> <strong>Bebas ketik</strong> nama email</li>
+                  </ul>
+                  <button className="btn-primary" style={{ width: "100%", fontSize: 16, padding: "16px", borderRadius: 9999 }} onClick={() => { setAuthMode("register"); setShowAuth(true); }}>
+                    Daftar Premium
+                  </button>
+                </div>
+              </div>
             </div>
           </section>
         )}
@@ -974,10 +1019,10 @@ export default function Home() {
         }}
       >
         <p>
-          <span style={{ fontWeight: 700, color: "var(--primary)" }}>FlashMail</span> — Email
-          sementara yang estetis & privat.
+          <span style={{ fontWeight: 700, color: "var(--primary)" }}>FlashMail</span> - Email
+          sementara yang cepat & aman
         </p>
-        <p style={{ marginTop: 4 }}>© {new Date().getFullYear()} flashmail.qzz.io</p>
+        <p style={{ marginTop: 4 }}>© {new Date().getFullYear()} R-Universe Labs</p>
       </footer>
     </>
   );
