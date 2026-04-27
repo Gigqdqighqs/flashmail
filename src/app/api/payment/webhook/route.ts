@@ -27,6 +27,24 @@ export async function POST(request: Request) {
         }
 
         if (paymentStatus === "completed") {
+            // SECURITY CHECK: Verify with Pakasir to prevent fake webhooks
+            const apiKey = process.env.PAKASIR_API_KEY;
+            const slug = process.env.PAKASIR_SLUG || "flashmail";
+
+            if (apiKey) {
+                const verifyRes = await fetch(`https://app.pakasir.com/api/transactiondetail?project=${slug}&amount=${tx.amount}&order_id=${invoiceId}&api_key=${apiKey}`);
+                if (verifyRes.ok) {
+                    const verifyData = await verifyRes.json();
+                    if (verifyData?.transaction?.status !== "completed") {
+                        return NextResponse.json({ error: "Verifikasi API Pakasir gagal atau status belum completed" }, { status: 400 });
+                    }
+                } else {
+                    return NextResponse.json({ error: "Gagal terhubung ke server verifikasi Pakasir" }, { status: 500 });
+                }
+            } else {
+                console.warn("WARNING: Transaksi diterima TANPA validasi karena PAKASIR_API_KEY kosong!");
+            }
+
             let planStr = "basic";
             if (tx.amount === 25000) planStr = "basic";
             if (tx.amount === 50000) planStr = "pro";
