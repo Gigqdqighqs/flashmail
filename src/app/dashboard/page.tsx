@@ -14,8 +14,6 @@ export default function DashboardPage() {
 
     // Modal Langganan
     const [showBilling, setShowBilling] = useState(false);
-    const [qrCode, setQrCode] = useState<string>("");
-    const [qrAmount, setQrAmount] = useState(0);
     const [billingLoading, setBillingLoading] = useState(false);
 
     // Modal Custom Alias
@@ -55,7 +53,6 @@ export default function DashboardPage() {
 
     async function handleCheckout(plan: string) {
         setBillingLoading(true);
-        setQrCode("");
         try {
             const res = await fetch("/api/payment/qris", {
                 method: "POST",
@@ -63,9 +60,9 @@ export default function DashboardPage() {
                 body: JSON.stringify({ plan }),
             });
             const data = await res.json();
-            if (data.qrContent) {
-                setQrCode(data.qrContent);
-                setQrAmount(data.amount);
+            if (data.redirectUrl) {
+                // Navigate to Pakasir gateway
+                window.location.href = data.redirectUrl + "&redirect=" + encodeURIComponent(window.location.origin + "/dashboard");
             } else {
                 alert(data.error || "Gagal membuka checkout");
             }
@@ -127,9 +124,8 @@ export default function DashboardPage() {
 
     const isPremium = user.plan !== "free";
     let maxDaily = 3;
-    if (user.plan === "basic") maxDaily = 50;
-    if (user.plan === "pro") maxDaily = 200;
-    if (user.plan === "unlimited" || user.plan === "vip") maxDaily = 9999;
+    if (user.plan === "basic") maxDaily = 250;
+    if (user.plan === "pro") maxDaily = 500;
 
     return (
         <main style={{ padding: "40px 24px", maxWidth: 900, margin: "0 auto", fontFamily: "var(--font)" }}>
@@ -299,50 +295,30 @@ export default function DashboardPage() {
                     <div className="modal-content paper-border" style={{ maxWidth: 600, borderRadius: 32, padding: 32 }} onClick={e => e.stopPropagation()}>
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 32 }}>
                             <h2 style={{ margin: 0, fontSize: 28, fontWeight: 800 }}>Langganan Premium</h2>
-                            <button onClick={() => { setShowBilling(false); setQrCode(""); }} className="btn-outline" style={{ padding: "8px 16px", borderRadius: 9999 }}>Tutup</button>
+                            <button onClick={() => setShowBilling(false)} className="btn-outline" style={{ padding: "8px 16px", borderRadius: 9999 }}>Tutup</button>
                         </div>
 
-                        {qrCode ? (
-                            <div style={{ textAlign: "center", background: "var(--surface)", padding: 32, borderRadius: 24, border: "2px dashed var(--outline)" }}>
-                                <h3 style={{ marginBottom: 24, fontSize: 20 }}>Scan QRIS untuk Membayar</h3>
-                                <div style={{ padding: 16, background: "white", display: "inline-block", borderRadius: 24, marginBottom: 24, boxShadow: "0 8px 16px rgba(0,0,0,0.1)" }}>
-                                    <img src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(qrCode)}`} alt="QRIS" width={250} height={250} />
+                        <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                            <div className="paper-border" style={{ padding: "24px", background: "var(--note-pink)", borderRadius: 24, display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 16 }}>
+                                <div>
+                                    <h3 style={{ margin: "0 0 8px 0", fontSize: 22, fontWeight: 800 }}>Paket Basic</h3>
+                                    <p style={{ margin: 0, color: "var(--on-surface-variant)", fontSize: 15 }}>Tulis nama email bebas.<br />Batas <strong>250 email</strong> per hari.</p>
                                 </div>
-                                <p style={{ fontSize: 24, fontWeight: 800, margin: "0 0 8px 0", color: "var(--primary)" }}>Total: Rp {qrAmount.toLocaleString("id-ID")}</p>
-                                <p style={{ fontSize: 15, color: "var(--on-surface-variant)", margin: 0 }}>Pembayaran diverifikasi secara instan</p>
+                                <button className="btn-primary" style={{ borderRadius: 9999, padding: "14px 32px", fontSize: 18 }} onClick={() => handleCheckout("basic")} disabled={billingLoading}>
+                                    {billingLoading ? "Loading..." : "Rp 25rb"}
+                                </button>
                             </div>
-                        ) : (
-                            <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-                                <div className="paper-border" style={{ padding: "24px", background: "var(--note-pink)", borderRadius: 24, display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 16 }}>
-                                    <div>
-                                        <h3 style={{ margin: "0 0 8px 0", fontSize: 22, fontWeight: 800 }}>Paket Basic</h3>
-                                        <p style={{ margin: 0, color: "var(--on-surface-variant)", fontSize: 15 }}>Tulis nama email bebas.<br />Batas <strong>50 email</strong> per hari.</p>
-                                    </div>
-                                    <button className="btn-primary" style={{ borderRadius: 9999, padding: "14px 32px", fontSize: 18 }} onClick={() => handleCheckout("basic")} disabled={billingLoading}>
-                                        {billingLoading ? "Loading..." : "Rp 20rb"}
-                                    </button>
+                            <div className="paper-border" style={{ padding: "24px", background: "var(--note-yellow)", borderRadius: 24, display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 16 }}>
+                                <div>
+                                    <div style={{ display: "inline-block", background: "var(--primary)", color: "white", padding: "4px 12px", borderRadius: 9999, fontSize: 12, fontWeight: 800, marginBottom: 8 }}>REKOMENDASI</div>
+                                    <h3 style={{ margin: "0 0 8px 0", fontSize: 22, fontWeight: 800 }}>Paket Pro</h3>
+                                    <p style={{ margin: 0, color: "var(--on-surface-variant)", fontSize: 15 }}>Cocok untuk ternak akun.<br />Batas <strong>500 email</strong> per hari.</p>
                                 </div>
-                                <div className="paper-border" style={{ padding: "24px", background: "var(--note-yellow)", borderRadius: 24, display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 16 }}>
-                                    <div>
-                                        <h3 style={{ margin: "0 0 8px 0", fontSize: 22, fontWeight: 800 }}>Paket Pro</h3>
-                                        <p style={{ margin: 0, color: "var(--on-surface-variant)", fontSize: 15 }}>Cocok untuk ternak akun.<br />Batas <strong>200 email</strong> per hari.</p>
-                                    </div>
-                                    <button className="btn-primary" style={{ borderRadius: 9999, padding: "14px 32px", fontSize: 18 }} onClick={() => handleCheckout("pro")} disabled={billingLoading}>
-                                        {billingLoading ? "Loading..." : "Rp 50rb"}
-                                    </button>
-                                </div>
-                                <div className="paper-border" style={{ padding: "24px", background: "var(--note-blue)", borderRadius: 24, display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 16 }}>
-                                    <div>
-                                        <div style={{ display: "inline-block", background: "var(--primary)", color: "white", padding: "4px 12px", borderRadius: 9999, fontSize: 12, fontWeight: 800, marginBottom: 8 }}>REKOMENDASI</div>
-                                        <h3 style={{ margin: "0 0 8px 0", fontSize: 22, fontWeight: 800 }}>Paket Unlimited</h3>
-                                        <p style={{ margin: 0, color: "var(--on-surface-variant)", fontSize: 15 }}>Tanpa batas harian samsek.<br />Kebebasan total buat kamu.</p>
-                                    </div>
-                                    <button className="btn-primary" style={{ borderRadius: 9999, padding: "14px 32px", fontSize: 18, background: "var(--on-surface)" }} onClick={() => handleCheckout("unlimited")} disabled={billingLoading}>
-                                        {billingLoading ? "Loading..." : "Rp 100rb"}
-                                    </button>
-                                </div>
+                                <button className="btn-primary" style={{ borderRadius: 9999, padding: "14px 32px", fontSize: 18 }} onClick={() => handleCheckout("pro")} disabled={billingLoading}>
+                                    {billingLoading ? "Loading..." : "Rp 50rb"}
+                                </button>
                             </div>
-                        )}
+                        </div>
                     </div>
                 </div>
             )}
