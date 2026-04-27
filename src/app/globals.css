@@ -517,15 +517,19 @@ body {
 
 /* ─── Loading Screen & Envelope Animation ─── */
 @keyframes envelope-open {
-  0% { transform: rotateX(0deg); }
-  40% { transform: rotateX(0deg); }
-  100% { transform: rotateX(-180deg); }
+  0% { transform: rotateX(0deg); z-index: 5; }
+  20% { transform: rotateX(0deg); z-index: 5; }
+  40% { transform: rotateX(180deg); z-index: 5; }
+  41% { transform: rotateX(180deg); z-index: 2; }
+  100% { transform: rotateX(180deg); z-index: 2; }
 }
 
-@keyframes letter-pop {
-  0% { transform: translateY(0); opacity: 0; }
-  60% { transform: translateY(0); opacity: 0; }
-  100% { transform: translateY(-20px); opacity: 1; }
+@keyframes letter-slide {
+  0% { transform: translateY(0); opacity: 1; }
+  40% { transform: translateY(0); opacity: 1; }
+  60% { transform: translateY(-45px); opacity: 1; }
+  75% { transform: translateY(-45px) scale(1.1); opacity: 1; }
+  100% { transform: translateY(-45px) scale(1.1); opacity: 1; }
 }
 
 @keyframes splash-fade-out {
@@ -551,43 +555,63 @@ body {
   animation: splash-fade-out 3s forwards;
 }
 
-.envelope-wrapper {
-  position: relative;
-  width: 100px;
-  height: 70px;
-  background: var(--primary-container);
-  border: 3px solid var(--ink);
-  border-radius: 4px;
-  margin-bottom: 32px;
+.envelope-scene {
+  margin-bottom: 50px;
+  perspective: 800px;
 }
 
-.envelope-flap {
+.envelope-wrapper {
+  position: relative;
+  width: 120px;
+  height: 80px;
+  transform-style: preserve-3d;
+}
+
+.envelope-back {
   position: absolute;
-  top: -3px;
-  left: -3px;
-  width: calc(100% + 6px);
-  height: 100%;
-  background: var(--primary);
+  inset: 0;
+  background: var(--surface-highest);
   border: 3px solid var(--ink);
-  clip-path: polygon(0 0, 50% 60%, 100% 0);
-  transform-origin: top;
-  z-index: 2;
-  animation: envelope-open 1.5s ease-in-out forwards;
+  border-radius: 4px;
+  z-index: 1;
 }
 
 .letter {
   position: absolute;
-  top: 10px;
+  bottom: 5px;
   left: 10px;
   right: 10px;
-  height: 40px;
-  background: white;
+  height: 65px;
+  background: var(--surface-lowest);
   border: 2px solid var(--ink);
-  z-index: 1;
+  border-radius: 4px;
+  z-index: 3;
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: letter-pop 2s ease-out forwards;
+  animation: letter-slide 2.5s ease-out forwards;
+}
+
+.envelope-front {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 5;
+  transform-origin: top;
+  animation: envelope-open 2.5s ease-in-out forwards;
+  overflow: visible;
 }
 
 .splash-branding {
