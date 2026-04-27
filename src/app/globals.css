@@ -515,11 +515,101 @@ body {
   animation: float3 7s ease-in-out infinite;
 }
 
-.animate-float-4 {
-  animation: float1 8s ease-in-out infinite alternate-reverse;
+/* ─── Loading Screen & Envelope Animation ─── */
+@keyframes envelope-open {
+  0% { transform: rotateX(0deg); }
+  40% { transform: rotateX(0deg); }
+  100% { transform: rotateX(-180deg); }
 }
 
-/* ─── Glass Background ─── */
+@keyframes letter-pop {
+  0% { transform: translateY(0); opacity: 0; }
+  60% { transform: translateY(0); opacity: 0; }
+  100% { transform: translateY(-20px); opacity: 1; }
+}
+
+@keyframes splash-fade-out {
+  0% { opacity: 1; visibility: visible; }
+  90% { opacity: 1; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+@keyframes content-reveal {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.loading-container {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: splash-fade-out 3s forwards;
+}
+
+.envelope-wrapper {
+  position: relative;
+  width: 100px;
+  height: 70px;
+  background: var(--primary-container);
+  border: 3px solid var(--ink);
+  border-radius: 4px;
+  margin-bottom: 32px;
+}
+
+.envelope-flap {
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: calc(100% + 6px);
+  height: 100%;
+  background: var(--primary);
+  border: 3px solid var(--ink);
+  clip-path: polygon(0 0, 50% 60%, 100% 0);
+  transform-origin: top;
+  z-index: 2;
+  animation: envelope-open 1.5s ease-in-out forwards;
+}
+
+.letter {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  height: 40px;
+  background: white;
+  border: 2px solid var(--ink);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: letter-pop 2s ease-out forwards;
+}
+
+.splash-branding {
+  text-align: center;
+  animation: content-reveal 1s ease-out 0.5s both;
+}
+
+.splash-logo {
+  font-weight: 900;
+  font-size: 28px;
+  color: var(--primary);
+  letter-spacing: -0.04em;
+  margin-bottom: 4px;
+}
+
+.splash-sub {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--outline);
+  opacity: 0.7;
+}
+
 .glass-panel {
   background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(12px);

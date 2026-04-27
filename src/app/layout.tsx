@@ -27,6 +27,7 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <LoadingScreen />
         {children}
         <footer
           style={{
@@ -43,6 +44,10 @@ export default function RootLayout({
           <p style={{ fontWeight: 600, opacity: 0.8 }}>2026 © R-Universe Labs</p>
         </footer>
       </body>
+    </html>
+  );
+}
+   </body>
     </html>
   );
 }
