@@ -637,59 +637,7 @@ function HomeContent() {
               />
             </div>
 
-            {/* Mailbox tabs + actions */}
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                marginTop: 40,
-                marginBottom: 16,
-                flexWrap: "wrap",
-                gap: 12,
-              }}
-            >
-              <div className="no-scrollbar" style={{
-                display: "flex",
-                gap: 8,
-                overflowX: "auto",
-                flex: 1,
-                paddingBottom: 2 // prevent shadow clipping
-              }}>
-                {mailboxes.map((mb) => (
-                  <button
-                    key={mb.id}
-                    onClick={() => {
-                      setSelectedMailbox(mb);
-                      setSelectedEmail(null);
-                    }}
-                    className={selectedMailbox?.id === mb.id ? "btn-primary" : "btn-outline"}
-                    style={{ fontSize: 12, padding: "8px 14px", flexShrink: 0 }}
-                  >
-                    <span className="material-symbols-outlined" style={{ fontSize: 16 }}>
-                      {selectedMailbox?.id === mb.id ? "mail" : "drafts"}
-                    </span>
-                    {mb.address.split("@")[0]}
-                  </button>
-                ))}
-              </div>
 
-              <div style={{ display: "flex", gap: 8 }}>
-                <button className="btn-outline" onClick={generateMailbox} disabled={creating} style={{ fontSize: 13, padding: "8px 16px" }}>
-                  <span className="material-symbols-outlined" style={{ fontSize: 16 }}>
-                    add
-                  </span>
-                  {creating ? "..." : "Baru"}
-                </button>
-                {selectedMailbox && (
-                  <button className="btn-danger" onClick={() => handleDeleteMailbox(selectedMailbox.id)} style={{ padding: "8px 14px" }}>
-                    <span className="material-symbols-outlined" style={{ fontSize: 16 }}>
-                      delete
-                    </span>
-                  </button>
-                )}
-              </div>
-            </div>
 
             {/* ─── Inbox ─── */}
             <div
