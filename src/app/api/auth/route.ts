@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
                     { status: 400 }
                 );
             }
-            const ipAddress = req.headers.get("x-forwarded-for") || req.ip || null;
+            const ipAddress = req.headers.get("x-forwarded-for") || null;
             const userAgent = req.headers.get("user-agent") || null;
             const result = await registerUser(email, password, ipAddress, userAgent);
             if (!result.success) {
@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
                     { status: 400 }
                 );
             }
-            const ipAddress = req.headers.get("x-forwarded-for") || req.ip || null;
+            const ipAddress = req.headers.get("x-forwarded-for") || null;
             const userAgent = req.headers.get("user-agent") || null;
             const result = await loginUser(email, password, ipAddress, userAgent);
             if (!result.success) {

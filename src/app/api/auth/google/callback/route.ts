@@ -34,7 +34,7 @@ export async function GET(request: NextRequest): Promise<Response> {
         // Check if user already exists
         const existingUser = await db.select().from(schema.users).where(eq(schema.users.googleId, googleUser.sub)).get();
 
-        const ipAddress = request.headers.get("x-forwarded-for") || request.ip || null;
+        const ipAddress = request.headers.get("x-forwarded-for") || null;
         const userAgent = request.headers.get("user-agent") || null;
 
         if (existingUser) {
