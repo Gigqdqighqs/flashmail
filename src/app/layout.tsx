@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import LoadingScreen from "@/components/LoadingScreen";
 
 export const metadata: Metadata = {
   title: "FlashMail — Email Sementara yang Estetis",
@@ -44,10 +45,6 @@ export default function RootLayout({
           <p style={{ fontWeight: 600, opacity: 0.8 }}>2026 © R-Universe Labs</p>
         </footer>
       </body>
-    </html>
-  );
-}
-   </body>
     </html>
   );
 }
