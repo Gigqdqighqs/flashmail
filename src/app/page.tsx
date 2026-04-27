@@ -413,7 +413,8 @@ export default function Home() {
                   rotate: "-1deg",
                 },
               ].map((f, i) => (
-                <div key={i} className="note-card" style={{ background: f.bg, transform: `rotate(${f.rotate})` }}>
+                <div key={i} className="note-card" style={{ background: f.bg, transform: `rotate(${f.rotate})`, position: "relative" }}>
+                  <div className="tape" style={{ top: -12, left: "50%", transform: "translateX(-50%) rotate(-1deg)", width: 60 }}></div>
                   <div
                     className="paper-border"
                     style={{
@@ -445,27 +446,47 @@ export default function Home() {
                 <h2 style={{ fontSize: 32, fontWeight: 800, marginBottom: 12 }}>Batasan Terlalu Ketat?</h2>
                 <p style={{ fontSize: 16, color: "var(--on-surface-variant)" }}>Dapatkan lebih banyak kuota setiap hari, kustomisasi email keren, dan masa aktif lebih leluasa.</p>
               </div>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 24 }}>
                 <div className="paper-border" style={{ background: "var(--surface-lowest)", padding: 24, borderRadius: 16, transform: "rotate(-1deg)" }}>
-                  <h3 style={{ fontSize: 20, fontWeight: 800 }}>Paket Gratis</h3>
+                  <h3 style={{ fontSize: 20, fontWeight: 800 }}>Gratis</h3>
                   <p style={{ fontSize: 32, fontWeight: 800, margin: "16px 0", color: "var(--on-surface-variant)" }}>Rp0</p>
-                  <ul style={{ listStyle: "none", padding: 0, gap: 12, display: "flex", flexDirection: "column", fontSize: 15, color: "var(--on-surface-variant)" }}>
-                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--error)", fontSize: 20 }}>close</span> Hanya 3 email/hari</li>
-                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--error)", fontSize: 20 }}>close</span> Kedaluwarsa dlm 2 jam</li>
-                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--error)", fontSize: 20 }}>close</span> Alamat diacak sistem</li>
+                  <ul style={{ listStyle: "none", padding: 0, gap: 12, display: "flex", flexDirection: "column", fontSize: 13, color: "var(--on-surface-variant)" }}>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--error)", fontSize: 18 }}>close</span> 3 email/hari</li>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--error)", fontSize: 18 }}>close</span> Email acak sistem</li>
                   </ul>
                 </div>
-                <div className="paper-border" style={{ background: "var(--note-blue)", padding: 28, borderRadius: 16, transform: "scale(1.05) rotate(1deg)", position: "relative", zIndex: 10 }}>
-                  <div style={{ position: "absolute", top: -12, right: -12, background: "var(--primary)", color: "white", padding: "4px 12px", borderRadius: 9999, fontWeight: 800, fontSize: 12, border: "2px solid var(--ink)" }}>PALING LARIS 🔥</div>
-                  <h3 style={{ fontSize: 24, fontWeight: 800 }}>Paket Unlimited</h3>
-                  <p style={{ fontSize: 32, fontWeight: 800, margin: "12px 0", color: "var(--primary)" }}>Rp100rb<span style={{ fontSize: 14, color: "var(--on-surface-variant)" }}>/selamanya</span></p>
-                  <ul style={{ listStyle: "none", padding: 0, margin: "16px 0", gap: 12, display: "flex", flexDirection: "column", fontSize: 15, fontWeight: 600 }}>
-                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--primary)", fontSize: 20 }}>check_circle</span> <strong>Tanpa batas</strong> jumlah email!</li>
-                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--primary)", fontSize: 20 }}>check_circle</span> Auto-delete dpt diatur</li>
-                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--primary)", fontSize: 20 }}>check_circle</span> <strong>Bebas ketik</strong> nama email</li>
+                <div className="paper-border" style={{ background: "var(--note-pink)", padding: 24, borderRadius: 16 }}>
+                  <h3 style={{ fontSize: 20, fontWeight: 800 }}>Pro</h3>
+                  <p style={{ fontSize: 32, fontWeight: 800, margin: "16px 0", color: "var(--on-surface-variant)" }}>Rp25rb<span style={{ fontSize: 12 }}>/bln</span></p>
+                  <ul style={{ listStyle: "none", padding: 0, gap: 12, display: "flex", flexDirection: "column", fontSize: 13, fontWeight: 600 }}>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--primary)", fontSize: 18 }}>check_circle</span> 50 kuota/hari</li>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--primary)", fontSize: 18 }}>check_circle</span> Alamat custom</li>
                   </ul>
-                  <button className="btn-primary" style={{ width: "100%", fontSize: 16, padding: "16px", borderRadius: 9999 }} onClick={() => { setAuthMode("register"); setShowAuth(true); }}>
-                    Daftar Premium
+                  <button className="btn-primary" style={{ width: "100%", fontSize: 13, padding: "12px", borderRadius: 9999, marginTop: 16 }} onClick={() => { setAuthMode("register"); setShowAuth(true); }}>
+                    Pilih Pro
+                  </button>
+                </div>
+                <div className="paper-border" style={{ background: "var(--note-yellow)", padding: 24, borderRadius: 16 }}>
+                  <h3 style={{ fontSize: 20, fontWeight: 800 }}>Premium</h3>
+                  <p style={{ fontSize: 32, fontWeight: 800, margin: "16px 0", color: "var(--on-surface-variant)" }}>Rp50rb<span style={{ fontSize: 12 }}>/bln</span></p>
+                  <ul style={{ listStyle: "none", padding: 0, gap: 12, display: "flex", flexDirection: "column", fontSize: 13, fontWeight: 600 }}>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--primary)", fontSize: 18 }}>check_circle</span> 250 kuota/hari</li>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--primary)", fontSize: 18 }}>check_circle</span> Alamat custom</li>
+                  </ul>
+                  <button className="btn-primary" style={{ width: "100%", fontSize: 13, padding: "12px", borderRadius: 9999, marginTop: 16 }} onClick={() => { setAuthMode("register"); setShowAuth(true); }}>
+                    Pilih Premium
+                  </button>
+                </div>
+                <div className="paper-border" style={{ background: "var(--note-blue)", padding: 26, borderRadius: 16, transform: "scale(1.05) rotate(1deg)", position: "relative", zIndex: 10 }}>
+                  <div style={{ position: "absolute", top: -12, right: -12, background: "var(--primary)", color: "white", padding: "4px 12px", borderRadius: 9999, fontWeight: 800, fontSize: 11, border: "2px solid var(--ink)" }}>PALING LARIS 🔥</div>
+                  <h3 style={{ fontSize: 20, fontWeight: 800 }}>Unlimited</h3>
+                  <p style={{ fontSize: 32, fontWeight: 800, margin: "12px 0", color: "var(--primary)" }}>Rp100rb<span style={{ fontSize: 12, color: "var(--on-surface-variant)" }}>/bln</span></p>
+                  <ul style={{ listStyle: "none", padding: 0, margin: "16px 0", gap: 12, display: "flex", flexDirection: "column", fontSize: 13, fontWeight: 600 }}>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--primary)", fontSize: 18 }}>check_circle</span> <strong>Tanpa batas</strong> kuota</li>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--primary)", fontSize: 18 }}>check_circle</span> Alamat custom</li>
+                  </ul>
+                  <button className="btn-primary" style={{ width: "100%", fontSize: 14, padding: "12px", borderRadius: 9999 }} onClick={() => { setAuthMode("register"); setShowAuth(true); }}>
+                    Pilih Unlimited
                   </button>
                 </div>
               </div>
