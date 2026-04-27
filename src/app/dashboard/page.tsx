@@ -255,35 +255,44 @@ export default function DashboardPage() {
                 ))}
             </div>
 
-            {/* Custom Alias Modal */}
             {showCustom && (
                 <div className="modal-overlay" onClick={() => setShowCustom(false)}>
                     <div className="modal-content paper-border" style={{ borderRadius: 32, padding: 32 }} onClick={e => e.stopPropagation()}>
-                        <h2 style={{ marginBottom: 24, fontSize: 24, fontWeight: 800 }}>Buat Email Kustom</h2>
-
-                        <div className="paper-border" style={{ display: "flex", alignItems: "center", marginBottom: 24, background: "var(--surface-lowest)", borderRadius: 9999, padding: "8px 24px" }}>
-                            <input
-                                type="text"
-                                style={{ flex: 1, border: "none", background: "transparent", fontSize: 18, outline: "none", fontWeight: 600 }}
-                                placeholder="namakamu"
-                                value={customAlias}
-                                onChange={e => setCustomAlias(e.target.value)}
-                            />
-                            <span style={{ fontWeight: 700, color: "var(--on-surface-variant)" }}>@flashmail.qzz.io</span>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
+                            <h2 style={{ margin: 0, fontSize: 24, fontWeight: 800 }}>Buat Email Kustom</h2>
+                            <button onClick={() => setShowCustom(false)} className="btn-outline" style={{ padding: "8px 16px", borderRadius: 9999 }}>Tutup</button>
                         </div>
 
-                        <h3 style={{ fontSize: 16, marginBottom: 12, fontWeight: 700 }}>Pilih Masa Aktif</h3>
-                        <select className="input" style={{ marginBottom: 32, width: "100%", borderRadius: 9999, padding: "14px 24px", fontSize: 16 }} value={customExpiry} onChange={e => setCustomExpiry(e.target.value)}>
-                            <option value="1">1 Jam</option>
-                            <option value="2">2 Jam</option>
-                            <option value="24">1 Hari</option>
-                            <option value="72">3 Hari</option>
-                            <option value="168">7 Hari</option>
-                            <option value="720">30 Hari</option>
-                        </select>
+                        <div style={{ marginBottom: 24 }}>
+                            <label style={{ display: "block", fontSize: 15, fontWeight: 700, marginBottom: 8, color: "var(--on-surface-variant)" }}>Nama Email</label>
+                            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                                <input
+                                    type="text"
+                                    className="input"
+                                    style={{ flex: 1, borderRadius: 16, padding: "14px 20px", fontSize: 16, fontWeight: 600 }}
+                                    placeholder="contoh: namakamu"
+                                    value={customAlias}
+                                    onChange={e => setCustomAlias(e.target.value)}
+                                />
+                                <span style={{ fontWeight: 800, color: "var(--on-surface-variant)", fontSize: 16, whiteSpace: "nowrap" }}>@flashmail.qzz.io</span>
+                            </div>
+                        </div>
 
-                        <button className="btn-primary" style={{ width: "100%", borderRadius: 9999, padding: "16px 24px", fontSize: 18 }} onClick={handleCreateCustom} disabled={customLoading}>
-                            {customLoading ? "Generasi..." : "Klaim Email"}
+                        <div style={{ marginBottom: 32 }}>
+                            <label style={{ display: "block", fontSize: 15, fontWeight: 700, marginBottom: 8, color: "var(--on-surface-variant)" }}>Masa Aktif</label>
+                            <select className="input" style={{ width: "100%", borderRadius: 16, padding: "14px 20px", fontSize: 16, cursor: "pointer", fontWeight: 600 }} value={customExpiry} onChange={e => setCustomExpiry(e.target.value)}>
+                                <option value="1">1 Jam</option>
+                                <option value="2">2 Jam</option>
+                                <option value="24">1 Hari</option>
+                                <option value="72">3 Hari</option>
+                                <option value="168">7 Hari</option>
+                                <option value="720">30 Hari</option>
+                            </select>
+                        </div>
+
+                        <button className="btn-primary" style={{ width: "100%", borderRadius: 9999, padding: "16px 24px", fontSize: 18, background: "var(--primary)" }} onClick={handleCreateCustom} disabled={customLoading}>
+                            <span className="material-symbols-outlined" style={{ fontSize: 22 }}>{customLoading ? "hourglass_empty" : "add_circle"}</span>
+                            {customLoading ? "Sedang Membuat..." : "Klaim Email Ini"}
                         </button>
                     </div>
                 </div>
