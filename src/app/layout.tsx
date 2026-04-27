@@ -26,7 +26,23 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <footer
+          style={{
+            textAlign: "center",
+            padding: "48px 24px 32px",
+            fontSize: 13,
+            color: "var(--outline)",
+          }}
+        >
+          <p style={{ marginBottom: 4 }}>
+            <span style={{ fontWeight: 700, color: "var(--primary)" }}>FlashMail</span> - Email
+            sementara yang cepat & aman
+          </p>
+          <p style={{ fontWeight: 600, opacity: 0.8 }}>2026 © R-Universe Labs</p>
+        </footer>
+      </body>
     </html>
   );
 }
