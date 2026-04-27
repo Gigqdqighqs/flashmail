@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
 interface Mailbox {
@@ -29,7 +29,7 @@ interface User {
   plan: "free" | "vip";
 }
 
-export default function Home() {
+function HomeContent() {
   const searchParams = useSearchParams();
   const mailboxIdFromUrl = searchParams.get("mailbox");
 
