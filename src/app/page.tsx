@@ -649,7 +649,13 @@ function HomeContent() {
                 gap: 12,
               }}
             >
-              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+              <div className="no-scrollbar" style={{
+                display: "flex",
+                gap: 8,
+                overflowX: "auto",
+                flex: 1,
+                paddingBottom: 2 // prevent shadow clipping
+              }}>
                 {mailboxes.map((mb) => (
                   <button
                     key={mb.id}
@@ -658,7 +664,7 @@ function HomeContent() {
                       setSelectedEmail(null);
                     }}
                     className={selectedMailbox?.id === mb.id ? "btn-primary" : "btn-outline"}
-                    style={{ fontSize: 12, padding: "8px 14px" }}
+                    style={{ fontSize: 12, padding: "8px 14px", flexShrink: 0 }}
                   >
                     <span className="material-symbols-outlined" style={{ fontSize: 16 }}>
                       {selectedMailbox?.id === mb.id ? "mail" : "drafts"}

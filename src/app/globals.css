@@ -463,6 +463,18 @@ body {
   }
 }
 
+.no-scrollbar {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari and Opera */
+}
+
 @keyframes float2 {
   0% {
     transform: translateY(0px) rotate(0deg);
