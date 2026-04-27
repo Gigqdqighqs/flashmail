@@ -1016,21 +1016,6 @@ function HomeContent() {
 
       {/* ─── Toast ─── */}
       <div className={`toast ${toast ? "show" : ""}`}>{toast}</div>
-
-      {/* ─── Footer ─── */}
-      <footer
-        style={{
-          textAlign: "center",
-          padding: "48px 24px 32px",
-          fontSize: 13,
-          color: "var(--outline)",
-        }}
-      >
-        <p>
-          <span style={{ fontWeight: 700, color: "var(--primary)" }}>FlashMail</span> - Email
-          sementara yang cepat & aman
-        </p>
-      </footer>
     </>
   );
 }
