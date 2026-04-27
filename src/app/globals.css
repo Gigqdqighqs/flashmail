@@ -436,6 +436,33 @@ body {
   }
 }
 
+.responsive-email-card {
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 600px) {
+  .responsive-email-card {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    text-align: center;
+  }
+
+  .responsive-email-card .email-address-text {
+    font-size: 14px !important;
+    text-align: center;
+    white-space: normal !important;
+    word-break: break-all !important;
+    overflow: visible !important;
+  }
+
+  .responsive-email-card .btn-primary {
+    width: 100% !important;
+  }
+}
+
 @keyframes float2 {
   0% {
     transform: translateY(0px) rotate(0deg);

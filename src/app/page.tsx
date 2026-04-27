@@ -554,38 +554,32 @@ function HomeContent() {
                 </div>
 
                 <div
-                  className="paper-border paper-shadow-sm"
+                  className="paper-border paper-shadow-sm responsive-email-card"
                   style={{
                     background: "var(--surface-lowest)",
                     borderRadius: 12,
                     padding: 16,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
                     gap: 12,
-                    flexWrap: "wrap",
                   }}
                 >
-                  <div style={{ display: "flex", alignItems: "center", gap: 12, flex: 1, minWidth: 0 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 12, minWidth: 0 }}>
                     <span
                       className="material-symbols-outlined icon-filled"
-                      style={{ color: "var(--primary)", fontSize: 28 }}
+                      style={{ color: "var(--primary)", fontSize: 24 }}
                     >
                       mail
                     </span>
                     <span
+                      className="email-address-text"
                       style={{
                         fontWeight: 700,
-                        fontSize: "clamp(16px, 3.5vw, 22px)",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                        whiteSpace: "nowrap",
+                        fontSize: "clamp(15px, 3vw, 20px)",
                       }}
                     >
                       {selectedMailbox?.address}
                     </span>
                   </div>
-                  <button className="btn-primary" onClick={() => copyAddress(selectedMailbox?.address || "")}>
+                  <button className="btn-primary" onClick={() => copyAddress(selectedMailbox?.address || "")} style={{ padding: "10px 24px" }}>
                     <span className="material-symbols-outlined icon-filled" style={{ fontSize: 18 }}>
                       content_copy
                     </span>
