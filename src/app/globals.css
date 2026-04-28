@@ -284,21 +284,22 @@ body {
   bottom: 24px;
   left: 50%;
   transform: translateX(-50%) translateY(100px);
-  padding: 12px 28px;
+  padding: 14px 28px;
   background: var(--on-surface);
   color: var(--bg);
   font-family: var(--font);
   font-weight: 600;
   font-size: 14px;
-  border-radius: 9999px;
+  border-radius: 16px;
   z-index: 9999;
   opacity: 0;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   pointer-events: none;
   text-align: center;
-  width: fit-content;
-  max-width: calc(100vw - 48px);
+  width: max-content;
+  max-width: calc(100vw - 40px);
   line-height: 1.4;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
 .toast.show {
