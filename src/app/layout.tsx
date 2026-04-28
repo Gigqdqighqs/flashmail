@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     title: "FlashMail — Email Sementara Gratis",
     description: "Dapatkan email sementara dalam hitungan detik. Privat, dan anonim",
     type: "website",
+    images: ["/icon.png"],
   },
 };
 
