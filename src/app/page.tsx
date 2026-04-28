@@ -451,8 +451,8 @@ function HomeContent() {
               <div className="tape" style={{ top: -12, left: "50%", transform: "translateX(-50%) rotate(-2deg)", width: 140 }}></div>
               <div style={{ textAlign: "center", marginBottom: 32 }}>
                 <span className="chip chip-info" style={{ marginBottom: 16 }}>🌟 KENAPA HARUS PREMIUM?</span>
-                <h2 style={{ fontSize: 32, fontWeight: 800, marginBottom: 12 }}>Batasan Terlalu Ketat?</h2>
-                <p style={{ fontSize: 16, color: "var(--on-surface-variant)" }}>Dapatkan lebih banyak kuota setiap hari, kustomisasi email keren, dan masa aktif lebih leluasa.</p>
+                <h2 style={{ fontSize: 28, fontWeight: 800, marginBottom: 12 }}>Batas email hariannya terlalu dikit ?</h2>
+                <p style={{ fontSize: 16, color: "var(--on-surface-variant)" }}>Dapatkan lebih banyak kuota setiap hari, kustomisasi nama email, dan masa aktif lebih leluasa</p>
               </div>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 24 }}>
                 <div className="paper-border" style={{ background: "var(--surface-lowest)", padding: 24, borderRadius: 16, transform: "rotate(-1deg)" }}>
