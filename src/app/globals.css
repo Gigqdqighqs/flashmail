@@ -284,7 +284,7 @@ body {
   bottom: 24px;
   left: 50%;
   transform: translateX(-50%) translateY(100px);
-  padding: 12px 24px;
+  padding: 12px 32px;
   background: var(--on-surface);
   color: var(--bg);
   font-family: var(--font);
@@ -295,6 +295,9 @@ body {
   opacity: 0;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   pointer-events: none;
+  white-space: nowrap;
+  width: max-content;
+  max-width: 90vw;
 }
 
 .toast.show {

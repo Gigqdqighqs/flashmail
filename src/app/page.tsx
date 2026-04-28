@@ -131,7 +131,7 @@ function HomeContent() {
   // Generate new mailbox
   const generateMailbox = async () => {
     if (!user) {
-      showToast("Kamu harus login/daftar (gratis) untuk membuat email.");
+      showToast("Kamu harus login/daftar (gratis) untuk membuat email");
       setAuthMode("register");
       setShowAuth(true);
       return;
