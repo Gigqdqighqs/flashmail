@@ -447,7 +447,7 @@ function HomeContent() {
             </div>
 
             {/* Premium Section Advertisement */}
-            <div style={{ marginTop: 80, marginBottom: 80, padding: 40, borderRadius: 24, background: "var(--surface)", border: "2px dashed var(--outline)", position: "relative" }} className="pap[...]
+            <div style={{ marginTop: 80, marginBottom: 80, padding: 40, borderRadius: 24, background: "var(--surface)", border: "2px dashed var(--outline)", position: "relative" }}>
               <div className="tape" style={{ top: -12, left: "50%", transform: "translateX(-50%) rotate(-2deg)", width: 140 }}></div>
               <div style={{ textAlign: "center", marginBottom: 32 }}>
                 <span className="chip chip-info" style={{ marginBottom: 16 }}>🌟 KENAPA HARUS PREMIUM?</span>
@@ -459,17 +459,17 @@ function HomeContent() {
                   <h3 style={{ fontSize: 20, fontWeight: 800 }}>Gratis</h3>
                   <p style={{ fontSize: 32, fontWeight: 800, margin: "16px 0", color: "var(--on-surface-variant)" }}>Rp0</p>
                   <ul style={{ listStyle: "none", padding: 0, gap: 12, display: "flex", flexDirection: "column", fontSize: 13, color: "var(--on-surface-variant)" }}>
-                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--error)", fontSize: 18 }}>close</span> 3 email/[...]
-                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--error)", fontSize: 18 }}>close</span> Email ac[...]
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--error)", fontSize: 18 }}>close</span> 3 email/hari</li>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--error)", fontSize: 18 }}>close</span> Email acak saja</li>
                   </ul>
                 </div>
                 <div className="paper-border" style={{ background: "var(--note-pink)", padding: 24, borderRadius: 16, transform: "scale(1.05) rotate(1deg)", position: "relative", zIndex: 10 }}>
-                  <div style={{ position: "absolute", top: -12, right: -12, background: "var(--primary)", color: "white", padding: "4px 12px", borderRadius: 9999, fontWeight: 800, fontSize: 11, b[...]}>✨ POPULER</div>
+                  <div style={{ position: "absolute", top: -12, right: -12, background: "var(--primary)", color: "white", padding: "4px 12px", borderRadius: 9999, fontWeight: 800, fontSize: 11 }}>✨ POPULER</div>
                   <h3 style={{ fontSize: 20, fontWeight: 800 }}>Unlimited</h3>
                   <p style={{ fontSize: 32, fontWeight: 800, margin: "12px 0", color: "var(--primary)" }}>Rp25rb<span style={{ fontSize: 12, color: "var(--on-surface-variant)" }}>/bln</span></p>
                   <ul style={{ listStyle: "none", padding: 0, margin: "16px 0", gap: 12, display: "flex", flexDirection: "column", fontSize: 13, fontWeight: 600 }}>
-                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--primary)", fontSize: 18 }}>check_circle</span>[...]
-                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--primary)", fontSize: 18 }}>check_circle</span>[...]
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--primary)", fontSize: 18 }}>check_circle</span> Email unlimited</li>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--primary)", fontSize: 18 }}>check_circle</span> Kustomisasi email</li>
                   </ul>
                   <button className="btn-primary" style={{ width: "100%", fontSize: 14, padding: "12px", borderRadius: 9999 }} onClick={() => { setAuthMode("register"); setShowAuth(true); }}>
                     Pilih Unlimited
