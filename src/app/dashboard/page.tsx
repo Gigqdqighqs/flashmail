@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-type PlanString = "free" | "basic" | "pro" | "unlimited" | "vip";
+type PlanString = "free" | "basic" | "unlimited" | "vip";
 
 export default function DashboardPage() {
     const router = useRouter();
@@ -124,8 +124,7 @@ export default function DashboardPage() {
 
     const isPremium = user.plan !== "free";
     let maxDaily = 3;
-    if (user.plan === "basic") maxDaily = 250;
-    if (user.plan === "pro") maxDaily = 500;
+    if (user.plan === "basic") maxDaily = 999999;
 
     return (
         <main style={{ padding: "40px 24px", maxWidth: 900, margin: "0 auto", fontFamily: "var(--font)" }}>
@@ -185,12 +184,12 @@ export default function DashboardPage() {
                     <h3 style={{ margin: "0 0 16px 0", fontSize: 22, fontWeight: 800 }}>Kuota Hari Ini</h3>
                     <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
                         <span style={{ fontSize: 15, fontWeight: 600 }}>Telah Dibuat</span>
-                        <span style={{ fontSize: 15, fontWeight: 800 }}>{user.generationCountToday} / {maxDaily === 9999 ? "∞" : maxDaily}</span>
+                        <span style={{ fontSize: 15, fontWeight: 800 }}>{user.generationCountToday} / {maxDaily === 999999 ? "∞" : maxDaily}</span>
                     </div>
                     {/* Progress bar made of paper */}
                     <div style={{ width: "100%", height: 16, background: "rgba(255,255,255,0.6)", borderRadius: 9999, overflow: "hidden", border: "2px solid var(--outline)" }}>
                         <div style={{
-                            width: `${Math.min((user.generationCountToday / (maxDaily === 9999 ? 1 : maxDaily)) * 100, 100)}%`,
+                            width: `${Math.min((user.generationCountToday / (maxDaily === 999999 ? 1 : maxDaily)) * 100, 100)}%`,
                             height: "100%",
                             background: "var(--primary)",
                             borderRadius: 9999
@@ -310,21 +309,12 @@ export default function DashboardPage() {
                         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
                             <div className="paper-border" style={{ padding: "24px", background: "var(--note-pink)", borderRadius: 24, display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 16 }}>
                                 <div>
-                                    <h3 style={{ margin: "0 0 8px 0", fontSize: 22, fontWeight: 800 }}>Paket Basic</h3>
-                                    <p style={{ margin: 0, color: "var(--on-surface-variant)", fontSize: 15 }}>Tulis nama email bebas.<br />Batas <strong>250 email</strong> per hari.</p>
+                                    <div style={{ display: "inline-block", background: "var(--primary)", color: "white", padding: "4px 12px", borderRadius: 9999, fontSize: 12, fontWeight: 800, marginBottom: 8 }}>✨ POPULER</div>
+                                    <h3 style={{ margin: "0 0 8px 0", fontSize: 22, fontWeight: 800 }}>Paket Unlimited</h3>
+                                    <p style={{ margin: 0, color: "var(--on-surface-variant)", fontSize: 15 }}>Email unlimited setiap hari.<br />Kustomisasi email & masa aktif fleksibel.</p>
                                 </div>
                                 <button className="btn-primary" style={{ borderRadius: 9999, padding: "14px 32px", fontSize: 18 }} onClick={() => handleCheckout("basic")} disabled={billingLoading}>
                                     {billingLoading ? "Loading..." : "Rp 25rb"}
-                                </button>
-                            </div>
-                            <div className="paper-border" style={{ padding: "24px", background: "var(--note-yellow)", borderRadius: 24, display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 16 }}>
-                                <div>
-                                    <div style={{ display: "inline-block", background: "var(--primary)", color: "white", padding: "4px 12px", borderRadius: 9999, fontSize: 12, fontWeight: 800, marginBottom: 8 }}>REKOMENDASI</div>
-                                    <h3 style={{ margin: "0 0 8px 0", fontSize: 22, fontWeight: 800 }}>Paket Pro</h3>
-                                    <p style={{ margin: 0, color: "var(--on-surface-variant)", fontSize: 15 }}>Cocok untuk ternak akun.<br />Batas <strong>500 email</strong> per hari.</p>
-                                </div>
-                                <button className="btn-primary" style={{ borderRadius: 9999, padding: "14px 32px", fontSize: 18 }} onClick={() => handleCheckout("pro")} disabled={billingLoading}>
-                                    {billingLoading ? "Loading..." : "Rp 50rb"}
                                 </button>
                             </div>
                         </div>

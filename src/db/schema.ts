@@ -5,7 +5,7 @@ export const users = sqliteTable("users", {
     googleId: text("google_id").unique(),
     email: text("email").unique(),
     passwordHash: text("password_hash"),
-    plan: text("plan", { enum: ["free", "basic", "pro", "unlimited", "vip"] })
+    plan: text("plan", { enum: ["free", "basic", "unlimited", "vip"] })
         .notNull()
         .default("free"),
     generationCountToday: integer("generation_count_today").notNull().default(0),

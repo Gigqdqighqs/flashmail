@@ -45,9 +45,9 @@ export async function POST(request: Request) {
                 console.warn("WARNING: Transaksi diterima TANPA validasi karena PAKASIR_API_KEY kosong!");
             }
 
+            // Only basic plan (25000) available now
             let planStr = "basic";
             if (tx.amount === 25000) planStr = "basic";
-            if (tx.amount === 50000) planStr = "pro";
 
             const now = new Date();
             const vipUntil = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000); // 30 days

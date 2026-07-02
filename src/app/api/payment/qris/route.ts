@@ -14,7 +14,10 @@ export async function POST(request: Request) {
         const planTarget = body.plan || "basic";
 
         let price = 25000;
-        if (planTarget === "pro") price = 50000;
+        // Only basic plan available now (25rb)
+        if (planTarget !== "basic") {
+            return NextResponse.json({ error: "Paket tidak ditemukan" }, { status: 400 });
+        }
 
         const userId = session.userId;
         const invoiceId = `FM-PAY-${userId.slice(0, 5)}-${Date.now().toString().slice(-6)}`;
