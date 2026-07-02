@@ -31,8 +31,7 @@ export async function createMailbox(
 
     // Limits
     let dailyLimit = 3;
-    if (plan === "basic") dailyLimit = 250;
-    if (plan === "pro") dailyLimit = 500;
+    if (plan === "basic") dailyLimit = 999999;
     if (plan === "unlimited" || plan === "vip") dailyLimit = 999999;
 
     if (user.generationCountToday >= dailyLimit) {
