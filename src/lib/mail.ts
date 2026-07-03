@@ -4,7 +4,7 @@ import { nanoid } from "nanoid";
 import { getUserPlan, getFullUser } from "./auth";
 
 const MAIL_DOMAIN = process.env.MAIL_DOMAIN || "flashmail.qzz.io";
-const FREE_MAX_MAILBOXES = 3;
+const FREE_MAX_MAILBOXES = 5;
 const FREE_EXPIRY_HOURS = 2;
 const VIP_EXPIRY_HOURS = 168; // 7 days
 
@@ -30,7 +30,7 @@ export async function createMailbox(
     const isPremium = plan !== "free";
 
     // Limits
-    let dailyLimit = 3;
+    let dailyLimit = 5;
     if (plan === "basic") dailyLimit = 999999;
     if (plan === "unlimited" || plan === "vip") dailyLimit = 999999;
 
@@ -44,7 +44,7 @@ export async function createMailbox(
     if (!isPremium && user.generationCountToday >= 3) {
         return {
             success: false,
-            error: "Batas 3 email harian untuk free plan telah tercapai. Upgrade ke VIP untuk membuat lebih banyak.",
+            error: "Batas 5 email harian untuk free plan telah tercapai. Upgrade ke VIP untuk membuat lebih banyak.",
         };
     }
 
