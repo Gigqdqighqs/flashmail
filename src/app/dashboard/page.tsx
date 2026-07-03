@@ -123,7 +123,7 @@ export default function DashboardPage() {
     }
 
     const isPremium = user.plan !== "free";
-    let maxDaily = 3;
+    let maxDaily = 5;
     if (user.plan === "basic") maxDaily = 999999;
 
     return (
