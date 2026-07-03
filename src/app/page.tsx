@@ -459,8 +459,8 @@ function HomeContent() {
                   <h3 style={{ fontSize: 20, fontWeight: 800 }}>Gratis</h3>
                   <p style={{ fontSize: 32, fontWeight: 800, margin: "16px 0", color: "var(--on-surface-variant)" }}>Rp0</p>
                   <ul style={{ listStyle: "none", padding: 0, gap: 12, display: "flex", flexDirection: "column", fontSize: 13, color: "var(--on-surface-variant)" }}>
-                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--error)", fontSize: 18 }}>close</span> 3 email/hari</li>
-                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--error)", fontSize: 18 }}>close</span> Email acak saja</li>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--error)", fontSize: 18 }}>close</span> 5 email/hari</li>
+                    <li style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="material-symbols-outlined" style={{ color: "var(--error)", fontSize: 18 }}>close</span> Email acak aja</li>
                   </ul>
                 </div>
                 <div className="paper-border" style={{ background: "var(--note-pink)", padding: 24, borderRadius: 16, transform: "scale(1.05) rotate(1deg)", position: "relative", zIndex: 10 }}>
